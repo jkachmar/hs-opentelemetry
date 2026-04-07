@@ -13,7 +13,7 @@ homepage:           https://github.com/iand675/hs-opentelemetry#readme
 bug-reports:        https://github.com/iand675/hs-opentelemetry/issues
 author:             Ian Duncan, Jade Lovelace
 maintainer:         ian@iankduncan.com
-copyright:          2024 Ian Duncan, Mercury Technologies
+copyright:          2026 Ian Duncan, Mercury Technologies
 license:            BSD3
 license-file:       LICENSE
 build-type:         Simple
@@ -36,11 +36,11 @@ library
   build-depends:
       base >=4.7 && <5
     , hs-opentelemetry-api ==0.3.*
-    , http-types
-    , iproute
-    , network
-    , text
-    , unordered-containers
-    , vault
-    , wai
+    , http-types ==0.12.*
+    , iproute ==1.7.*
+    , network ==3.2.*
+    , text >=2 && <2.1
+    , unordered-containers ==0.2.*
+    , vault ==0.3.*
+    , wai ==3.2.*
   default-language: Haskell2010

@@ -13,7 +13,7 @@ homepage:           https://github.com/iand675/hs-opentelemetry#readme
 bug-reports:        https://github.com/iand675/hs-opentelemetry/issues
 author:             Ian Duncan, Jade Lovelace
 maintainer:         ian@iankduncan.com
-copyright:          2024 Ian Duncan, Mercury Technologies
+copyright:          2026 Ian Duncan, Mercury Technologies
 license:            BSD3
 license-file:       LICENSE
 build-type:         Simple
@@ -84,28 +84,28 @@ library
       RecordWildCards
   ghc-options: -Wall
   build-depends:
-      async
-    , attoparsec
+      async >=2 && <2.1
+    , attoparsec ==0.1.*
     , base >=4.7 && <5
-    , binary
-    , bytestring
-    , charset
-    , clock
-    , hashable
-    , http-types
-    , memory
-    , mtl
-    , regex-tdfa
-    , safe-exceptions
-    , template-haskell
-    , text
+    , binary >=4.7 && <5
+    , bytestring ==0.12.*
+    , charset ==0.3.*
+    , clock ==0.8.*
+    , hashable ==1.5.*
+    , http-types ==0.12.*
+    , memory ==0.18.*
+    , mtl >=2 && <2.1
+    , regex-tdfa ==1.3.*
+    , safe-exceptions ==0.1.*
+    , template-haskell >=2.21 && <2.22 || >=2.22 && <2.23 || >=2.23 && <2.24 || >=2.24 && <2.25
+    , text >=2 && <2.1
     , thread-utils-context ==0.3.*
-    , transformers
-    , unliftio-core
-    , unordered-containers
-    , vault
-    , vector
-    , vector-builder
+    , transformers ==0.6.*
+    , unliftio-core ==0.2.*
+    , unordered-containers ==0.2.*
+    , vault ==0.3.*
+    , vector ==0.13.*
+    , vector-builder ==0.3.*
   default-language: Haskell2010
 
 test-suite hs-opentelemetry-api-test
@@ -131,11 +131,11 @@ test-suite hs-opentelemetry-api-test
   build-depends:
       base >=4.7 && <5
     , hs-opentelemetry-api
-    , hspec
-    , mtl
-    , text
-    , unliftio-core
-    , unordered-containers
-    , vector
-    , vector-builder
+    , hspec ==2.11.*
+    , mtl >=2 && <2.1
+    , text >=2 && <2.1
+    , unliftio-core ==0.2.*
+    , unordered-containers ==0.2.*
+    , vector ==0.13.*
+    , vector-builder ==0.3.*
   default-language: Haskell2010

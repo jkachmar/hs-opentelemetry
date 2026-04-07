@@ -34,8 +34,8 @@ library
       src
   ghc-options: -Wall
   build-depends:
-      async
+      async >=2 && <2.1
     , base >=4.7 && <5
     , hs-opentelemetry-api ==0.3.*
-    , unagi-chan
+    , unagi-chan ==0.4.*
   default-language: Haskell2010

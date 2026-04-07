@@ -37,18 +37,18 @@ library
   ghc-options: -Wall
   build-depends:
       base >=4.7 && <5
-    , bytestring
-    , case-insensitive
+    , bytestring ==0.12.*
+    , case-insensitive ==1.2.*
     , hs-opentelemetry-api ==0.3.*
     , hs-opentelemetry-otlp ==0.1.*
     , hs-opentelemetry-propagator-w3c
     , http-client
     , http-conduit
-    , http-types
+    , http-types ==0.12.*
     , microlens
     , proto-lens >=0.7.1.0
-    , text
-    , unordered-containers
-    , vector
-    , zlib
+    , text >=2 && <2.1
+    , unordered-containers ==0.2.*
+    , vector ==0.13.*
+    , zlib >=0.6 && <0.7 || >=0.7 && <0.8
   default-language: Haskell2010
