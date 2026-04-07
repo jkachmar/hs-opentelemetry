@@ -25,15 +25,18 @@ library:
   ghc-options: -Wall
   source-dirs: src
   dependencies:
+  # instrumented library
+  - yesod-core ^>= 1.6
+  # opentelemetry dependencies
   - hs-opentelemetry-api ^>= 0.3
-  - hs-opentelemetry-instrumentation-wai >= 0.0.1 && < 0.2
-  - microlens
-  - template-haskell
-  - text
-  - unliftio
-  - unordered-containers
-  - wai
-  - yesod-core
+  - hs-opentelemetry-instrumentation-wai
+  # external dependencies
+  - microlens ^>= 0.4 || ^>= 0.5
+  - template-haskell ^>= 2.21 || ^>= 2.22 || ^>= 2.23 || ^>= 2.24
+  - text ^>= 2
+  - unliftio ^>= 0.2
+  - unordered-containers ^>= 0.2
+  - wai ^>= 3.2
 
 # Test suite not yet implemented
 _tests:
@@ -45,4 +48,5 @@ _tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    # package under test
     - hs-opentelemetry-instrumentation-yesod

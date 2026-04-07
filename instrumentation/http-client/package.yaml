@@ -25,18 +25,21 @@ library:
   ghc-options: -Wall
   source-dirs: src
   dependencies:
-  - aeson
-  - bytestring
-  - case-insensitive
-  - conduit
+  # instrumented libraries
+  - http-client ^>= 0.7
+  - http-conduit ^>= 2.2
+  # opentelemetry dependencies
   - hs-opentelemetry-api ^>= 0.3
   - hs-opentelemetry-instrumentation-conduit >= 0.0.1 && < 0.2
-  - http-client
-  - http-conduit
-  - http-types
-  - text
-  - unliftio
-  - unordered-containers
+  # external dependencies
+  - aeson
+  - bytestring ^>= 0.12
+  - case-insensitive ^>= 1.2
+  - conduit ^>= 1.2
+  - http-types ^>= 0.12
+  - text ^>= 2
+  - unliftio ^>= 0.2 # todo: unliftio-core
+  - unordered-containers ^>= 0.2
 
 # Test suite not yet implemented
 _tests:
@@ -48,4 +51,5 @@ _tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    # package under test
     - hs-opentelemetry-instrumentation-http-client

@@ -24,15 +24,18 @@ dependencies:
 library:
   source-dirs: src
   dependencies:
+  # instrumented library
+  - postgresql-simple ^>= 0.5 || ^>= 0.6 || ^>= 0.7
+  # opentelemetry dependencies
   - hs-opentelemetry-api ^>= 0.3
-  - iproute
-  - postgresql-simple
-  - postgresql-libpq
-  - text
-  - bytestring
-  - unliftio-core
-  - unliftio # todo, unliftio-core
-  - unordered-containers
+  # external dependencies
+  - bytestring ^>= 0.12
+  - iproute ^>= 1.7
+  - postgresql-libpq ^>= 0.10 || ^>= 0.11
+  - text ^>= 2
+  - unliftio-core ^>= 0.2
+  - unliftio ^>= 0.2 # todo: unliftio-core
+  - unordered-containers ^>= 0.2
 
 # Test suite not yet implemented
 _tests:
@@ -44,4 +47,5 @@ _tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    # package under test
     - hs-opentelemetry-instrumentation-postgresql-simple

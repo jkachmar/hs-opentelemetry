@@ -23,32 +23,32 @@ default-extensions:
 
 dependencies:
 - base >= 4.7 && < 5
+- mtl ^>= 2
+- text ^>= 2
+- unliftio-core ^>= 0.2
+- unordered-containers ^>= 0.2
+- vector ^>= 0.13
+- vector-builder ^>= 0.3
 
 library:
   source-dirs: src
   ghc-options: -Wall
   dependencies:
-  - async
-  - attoparsec
-  - binary
-  - bytestring
-  - charset
-  - clock
-  - hashable
-  - http-types
-  - memory
-  - mtl
-  - regex-tdfa
-  - safe-exceptions
-  - template-haskell
-  - text
-  - thread-utils-context == 0.3.*
-  - transformers
-  - unliftio-core
-  - unordered-containers
-  - vault
-  - vector
-  - vector-builder
+  - async ^>= 2
+  - attoparsec ^>= 0.1
+  - binary >= 4.7 && < 5
+  - bytestring ^>= 0.12
+  - charset ^>= 0.3
+  - clock ^>= 0.8
+  - hashable ^>= 1.5
+  - http-types ^>= 0.12
+  - memory ^>= 0.18
+  - regex-tdfa ^>= 1.3
+  - safe-exceptions ^>= 0.1
+  - template-haskell ^>= 2.21 || ^>= 2.22 || ^>= 2.23 || ^>= 2.24
+  - thread-utils-context ^>= 0.3
+  - transformers ^>= 0.6
+  - vault ^>= 0.3
   other-modules:
   - OpenTelemetry.Context.Types
   - OpenTelemetry.Internal.Trace.Types
@@ -63,11 +63,7 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    # package under test
     - hs-opentelemetry-api
-    - hspec
-    - mtl
-    - text
-    - unliftio-core
-    - unordered-containers
-    - vector
-    - vector-builder
+    # external dependencies
+    - hspec ^>= 2.11

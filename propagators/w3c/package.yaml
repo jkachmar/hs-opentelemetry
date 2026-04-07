@@ -19,17 +19,20 @@ category:            OpenTelemetry, Tracing, Web
 description:         Please see the README on GitHub at <https://github.com/iand675/hs-opentelemetry/tree/main/propagators/w3c#readme>
 
 dependencies:
+# opentelemetry dependencies
+- hs-opentelemetry-api
+# external dependencies
+- attoparsec ^>= 0.1
 - base >= 4.7 && < 5
+- bytestring ^>= 0.12
+- text ^>= 2
 
 library:
   ghc-options: -Wall
   source-dirs: src
   dependencies:
-  - bytestring
-  - hs-opentelemetry-api ^>= 0.3
-  - http-types
-  - attoparsec
-  - text
+  # external dependencies
+  - http-types ^>= 0.12
 
 tests:
   hs-opentelemetry-propagator-w3c-test:
@@ -40,11 +43,9 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    # package under test
     - hs-opentelemetry-propagator-w3c
-    - hspec
-    - hspec-discover
-    - QuickCheck
-    - bytestring
-    - text
-    - hs-opentelemetry-api
-    - attoparsec
+    # test suite dependencies
+    - hspec ^>= 2.11
+    - hspec-discover ^>= 2.11
+    - QuickCheck ^>= 2

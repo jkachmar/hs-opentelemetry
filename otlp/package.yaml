@@ -24,4 +24,5 @@ dependencies:
 library:
   source-dirs: src
   dependencies:
-  - proto-lens-runtime
+  # external dependencies
+  - proto-lens-runtime ^>= 0.7

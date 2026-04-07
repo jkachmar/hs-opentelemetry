@@ -26,11 +26,13 @@ library:
   ghc-options: -Wall
   source-dirs: src
   dependencies:
-  - attoparsec
-  - bytestring
+  # opentelemetry dependencies
   - hs-opentelemetry-api ^>= 0.3
-  - http-types
-  - text
+  # external dependencies
+  - attoparsec ^>= 0.1
+  - bytestring ^>= 0.12
+  - http-types ^>= 0.12
+  - text ^>= 2
 
 # Test suite not yet implemented
 _tests:
@@ -42,4 +44,5 @@ _tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    # package under test
     - hs-opentelemetry-propagator-b3

@@ -25,10 +25,13 @@ library:
   # ghc-options: -Wall
   source-dirs: src
   dependencies:
-  - hs-opentelemetry-api ^>= 0.3
+  # instrumented library
   - hspec-core >= 2.9.4
-  - text
-  - mtl
+  # opentelemetry dependencies
+  - hs-opentelemetry-api ^>= 0.3
+  # external libraries
+  - mtl ^>= 2
+  - text ^>= 2
 
 # Test suite not yet implemented
 _tests:

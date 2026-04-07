@@ -45,20 +45,23 @@ ghc-options:
   - -Wno-missing-kind-signatures
 
 dependencies:
+# opentelemetry dependencies
+- hs-opentelemetry-api
+# external dependencies
 - base >= 4.7 && < 5
+- time ^>= 1
 
 library:
   source-dirs: src
   dependencies:
-  - bytestring
+  # external dependencies
+  - bytestring ^>= 0.12
   - honeycomb >= 0.1.0.1
-  - hs-opentelemetry-api
-  - mtl
-  - text
-  - time
-  - transformers
-  - unordered-containers
-  - uri-bytestring
+  - mtl ^>= 2
+  - text ^>= 2
+  - transformers ^>= 0.6
+  - unordered-containers ^>= 0.2
+  - uri-bytestring ^>= 0.4
 
 tests:
   test:
@@ -76,7 +79,7 @@ tests:
       hspec-discover
 
     dependencies:
-      - hs-opentelemetry-api
+      # package under test
       - hs-opentelemetry-vendor-honeycomb
-      - hspec
-      - time
+      # test suite dependencies
+      - hspec ^>= 2.11

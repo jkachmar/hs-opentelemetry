@@ -24,12 +24,14 @@ dependencies:
 library:
   source-dirs: src
   dependencies:
-  - case-insensitive
+  # opentelemetry dependencies
   - hs-opentelemetry-api ^>= 0.3
   - hs-opentelemetry-instrumentation-wai
-  - text
-  - unordered-containers
-  - wai
+  # external dependencies
+  - case-insensitive ^>= 1.2
+  - text ^>= 2
+  - unordered-containers ^>= 0.2
+  - wai ^>= 3.2
 
 # Test suite not yet implemented
 _tests:
@@ -41,4 +43,5 @@ _tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    # package under test
     - hs-opentelemetry-instrumentation-cloudflare

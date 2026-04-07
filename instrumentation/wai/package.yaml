@@ -25,14 +25,17 @@ library:
   ghc-options: -Wall
   source-dirs: src
   dependencies:
-  - http-types
-  - wai
+  # instrumented library
+  - wai ^>= 3.2
+  # opentelemetry dependencies
   - hs-opentelemetry-api ^>= 0.3
-  - vault
-  - text
-  - network
-  - iproute
-  - unordered-containers
+  # external dependencies
+  - http-types ^>= 0.12
+  - iproute ^>= 1.7
+  - network ^>= 3.2
+  - text ^>= 2
+  - unordered-containers ^>= 0.2
+  - vault ^>= 0.3
 
 # Test suite not yet implemented
 _tests:
@@ -44,4 +47,5 @@ _tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    # package under test
     - hs-opentelemetry-instrumentation-wai

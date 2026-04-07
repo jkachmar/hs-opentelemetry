@@ -26,9 +26,11 @@ library:
   ghc-options: -Wall
   source-dirs: src
   dependencies:
+  # opentelemetry dependencies
   - hs-opentelemetry-api ^>= 0.3
-  - async
-  - unagi-chan
+  # external dependencies
+  - async ^>= 2
+  - unagi-chan ^>= 0.4
 
 # Test suite not yet implemented
 _tests:
@@ -40,4 +42,5 @@ _tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    # package under test
     - hs-opentelemetry-exporter-in-memory

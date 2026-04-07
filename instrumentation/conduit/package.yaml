@@ -25,9 +25,12 @@ library:
   ghc-options: -Wall
   source-dirs: src
   dependencies:
-  - conduit
-  - text
+  # instrumented library
+  - conduit ^>= 1.2
+  # opentelemetry dependencies
   - hs-opentelemetry-api ^>= 0.3
+  # external dependencies
+  - text ^>= 2
 
 # Test suite not yet implemented
 _tests:
@@ -39,4 +42,5 @@ _tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    # package under test
     - hs-opentelemetry-instrumentation-conduit
