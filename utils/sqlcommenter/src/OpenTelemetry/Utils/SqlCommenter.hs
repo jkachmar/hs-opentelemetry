@@ -1,5 +1,4 @@
 {-# LANGUAGE BangPatterns #-}
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 {- |
@@ -122,6 +121,7 @@ module OpenTelemetry.Utils.SqlCommenter (
   lookupSqlCommenterAttributes,
   getSqlCommenterAttributes,
   addTraceDataToAttributes,
+  addTraceDataToAttributesPure,
   getSqlCommenterAttributesWithTraceData,
 
   -- * Testing support
@@ -135,6 +135,7 @@ import qualified Data.ByteString as BS
 import Data.Char
 import Data.Foldable
 import Data.Function ((&))
+import Data.List (intersperse)
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as M
 import Data.Maybe
@@ -148,10 +149,10 @@ import Network.HTTP.Types (urlDecode)
 import qualified OpenTelemetry.Context as Ctxt
 import qualified OpenTelemetry.Context.ThreadLocal as TL
 import OpenTelemetry.Propagator.W3CTraceContext (encodeSpanContext)
-import OpenTelemetry.Trace.Core as Core
+import qualified OpenTelemetry.Trace.Core as Core
 import OpenTelemetry.Utils.SqlCommenter.Internal.Compat (StrictTextBuilder)
 import System.IO.Unsafe
-import Prelude hiding (take, takeWhile)
+import Prelude hiding (span, take, takeWhile)
 
 
 sqlCommenterKey :: Ctxt.Key (Map Text Text)
@@ -254,16 +255,6 @@ insert val (Word8Set w0 w1 w2 w3) = case selectWord64 val of
   _ -> error "Word8 value out of bounds"
 
 
--- Removes a Word8 value from the set.
-delete :: Word8 -> Word8Set -> Word8Set
-delete val (Word8Set w0 w1 w2 w3) = case selectWord64 val of
-  (0, pos) -> Word8Set (clearBit w0 $ fromIntegral pos) w1 w2 w3
-  (1, pos) -> Word8Set w0 (clearBit w1 $ fromIntegral pos) w2 w3
-  (2, pos) -> Word8Set w0 w1 (clearBit w2 $ fromIntegral pos) w3
-  (3, pos) -> Word8Set w0 w1 w2 (clearBit w3 $ fromIntegral pos)
-  _ -> error "Word8 value out of bounds"
-
-
 -- Checks if a Word8 value is in the set.
 member :: Word8 -> Word8Set -> Bool
 member val (Word8Set w0 w1 w2 w3) = case selectWord64 val of
@@ -280,19 +271,8 @@ unreservedQS :: Word8Set
 unreservedQS = foldr insert OpenTelemetry.Utils.SqlCommenter.empty $ map c2w "-_.~'"
 
 
-intersperse :: Foldable f => a -> f a -> [a]
-intersperse sep a = case toList a of
-  [] -> []
-  (x : xs) -> x : prependToAll sep xs
-    where
-      prependToAll sep = \case
-        [] -> []
-        (x : xs) -> sep : x : prependToAll sep xs
-{-# INLINE intersperse #-}
-
-
 intercalate :: (Monoid a, Foldable f) => a -> f a -> a
-intercalate delim l = mconcat (intersperse delim l)
+intercalate delim = mconcat . intersperse delim . toList
 {-# INLINE intercalate #-}
 
 
@@ -339,7 +319,7 @@ singleLineComment = "--" *> takeTill isEndOfLine <* (endOfLine <|> endOfInput)
 -- Parser for multi-line comments
 multiLineComment :: Parser Text
 multiLineComment = do
-  "/*"
+  _ <- "/*"
   commentInner mempty
   where
     commentInner :: StrictTextBuilder -> Parser Text
